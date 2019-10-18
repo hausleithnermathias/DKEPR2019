@@ -15,6 +15,10 @@
             <groupId>at.dkepr</groupId>
             <artifactId>api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>at.dkepr</groupId>
+            <artifactId>cinema1</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

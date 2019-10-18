@@ -11,6 +11,7 @@
 	<modules>
 		<module>app</module>
 		<module>api</module>
+		<module>cinema1</module>
 	</modules>
 
 	<groupId>at.dkepr</groupId>
@@ -38,6 +39,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<version>3.13.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-fuseki-server</artifactId>
+			<version>3.13.1</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -45,6 +57,11 @@
 			<dependency>
 				<groupId>at.dkepr</groupId>
 				<artifactId>api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>at.dkepr</groupId>
+				<artifactId>cinema1</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

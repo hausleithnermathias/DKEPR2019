@@ -1,5 +1,6 @@
 package at.dkepr.cinemaservice;
 
+import at.dkepr.cinemaservice.cinema1.FusekiServerTest;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,13 @@ public class CinemaConfiguration implements ApplicationListener<ApplicationReady
 
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
-        System.out.println("hello world, I have just started up");
+        System.out.println("adsf");
+        try {
+            FusekiServerTest.start();
+        }
+        catch (Exception c) {
+            c.printStackTrace();
+        }
+
     }
 }
