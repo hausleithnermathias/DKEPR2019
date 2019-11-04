@@ -1,5 +1,4 @@
 package at.dkepr.cinemaservice.cinema1;
-
 import org.apache.jena.fuseki.build.FusekiConfig;
 import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.server.DataAccessPoint;
@@ -16,6 +15,37 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class FusekiServerTest {
+
+                /*  TODO --> Beispiel RDF Model aus RDF/XML File erzeugen und durchiterieren
+
+                Resource r = new ClassPathResource("test.rdf");
+                File f = r.getFile();
+                Model model = ModelFactory.createDefaultModel();
+                try (FileInputStream in = new FileInputStream(f)) {
+                model.read(in);
+
+                // list the statements in the Model
+                StmtIterator iter = model.listStatements();
+                // print out the predicate, subject and object of each statement
+                while (iter.hasNext()) {
+                    Statement stmt      = iter.nextStatement();  // get next statement
+                    Resource subject   = stmt.getSubject();     // get the subject
+                    Property  predicate = stmt.getPredicate();   // get the predicate
+                    RDFNode   object    = stmt.getObject();      // get the object
+
+                    System.out.print(subject.toString());
+                    System.out.print(" " + predicate.toString() + " ");
+                    if (object instanceof Resource) {
+                        System.out.print(object.toString());
+                    } else {
+                        // object is a literal
+                        System.out.print(" \"" + object.toString() + "\"");
+                    }
+                    System.out.println(" .");
+
+
+                    }
+                */
 
     public static void start() throws IOException {
 
