@@ -6,10 +6,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import javax.annotation.PostConstruct;
 
 @Configuration
-public class CinemaConfiguration implements ApplicationListener<ApplicationReadyEvent> {
+public class CinemaConfiguration  {
 
+    /*
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
         System.out.println("Hello!");
@@ -21,8 +23,14 @@ public class CinemaConfiguration implements ApplicationListener<ApplicationReady
         catch (Exception c) {
             c.printStackTrace();
         }
-
-         */
+        return;
 
     }
+    */
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("test");
+    }
+
 }
