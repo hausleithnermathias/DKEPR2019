@@ -12,14 +12,7 @@ public class CinemaConfiguration {
         System.out.println("asdf");
 
         System.out.println("ddsf");
-       /*
-        try {
-            FusekiServerTest.start();
-        }
-        catch (Exception c) {
-            c.printStackTrace();
-        }
-*/
+
 
 
     }
