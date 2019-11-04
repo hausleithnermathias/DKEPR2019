@@ -11,7 +11,7 @@ import java.io.*;
 
 @RestController
 @RequestMapping("/test")
-public class ExternalAPI {
+public class MetaServiceAPI {
 
     @Autowired
     ResourceLoader resourceLoader;
@@ -21,14 +21,11 @@ public class ExternalAPI {
         return "Hallo Welt!";
     }
 
-    @RequestMapping(value = "/Movies/{day}", method = RequestMethod.GET, produces = {"application/xml", "application/rdf+xml"})
-    public @ResponseBody
-    String getMoviesByDay(@PathVariable String day) throws IOException {
-
+    @RequestMapping(value = "/Movies/{day}", method = RequestMethod.GET)
+    public @ResponseBody String getMoviesByDay(@PathVariable String day) throws IOException {
 
         Model model = ModelFactory.createDefaultModel();
         model.read("http://localhost:8080/Cinema1/Movies/" + day);
-
 
         // list the statements in the Model
         StmtIterator iter = model.listStatements();

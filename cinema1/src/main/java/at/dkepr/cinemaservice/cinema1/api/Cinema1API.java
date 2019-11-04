@@ -1,6 +1,5 @@
 package at.dkepr.cinemaservice.cinema1.api;
 
-import at.dkepr.cinemaservice.cinema1.FusekiServerTest;
 import at.dkepr.cinemaservice.cinema1.services.Cinema1Service;
 import org.apache.jena.rdf.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
