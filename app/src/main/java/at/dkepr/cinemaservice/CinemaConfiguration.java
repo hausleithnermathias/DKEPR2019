@@ -12,13 +12,17 @@ public class CinemaConfiguration implements ApplicationListener<ApplicationReady
 
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
-        System.out.println("adsf");
+        System.out.println("Hello!");
+
+        /*
         try {
             FusekiServerTest.start();
         }
         catch (Exception c) {
             c.printStackTrace();
         }
+
+         */
 
     }
 }

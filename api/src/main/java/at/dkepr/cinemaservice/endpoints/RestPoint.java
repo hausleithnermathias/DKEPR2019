@@ -1,12 +1,9 @@
 package at.dkepr.cinemaservice.endpoints;
+import at.dkepr.cinemaservice.cinema1.FusekiServerTest;
+import org.apache.jena.rdf.model.Model;
+import org.springframework.web.bind.annotation.*;
+import java.io.*;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/test")
@@ -17,16 +14,13 @@ public class RestPoint {
         return "Hallo Welt!";
     }
 
-    @GetMapping("/allMovies")
-    public List<Integer> getAllMovies(){
-
-        List<Integer> intlist = new ArrayList<>();
-
-        intlist.add(1);
-        intlist.add(2);
-        intlist.add(3);
-
-        return intlist;
+    @RequestMapping(value="/Movies/Mo", method=RequestMethod.GET, produces={"application/xml", "application/rdf+xml"})
+    public @ResponseBody String getMondayMovies() throws IOException {
+        Model model = FusekiServerTest.getMoviesByDay("http://localhost:3030/cinema1", "Mo");
+        try(final ByteArrayOutputStream os = new ByteArrayOutputStream() ){
+            model.write(os);
+            return os.toString();
+        }
     }
 
 
