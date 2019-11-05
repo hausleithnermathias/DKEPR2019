@@ -1,0 +1,8 @@
+{
+  "/cinema/api/*": {
+    "target": "http://localhost:14001/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

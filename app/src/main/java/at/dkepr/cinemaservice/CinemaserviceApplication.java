@@ -9,8 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 public class CinemaserviceApplication {
 
 	public static void main(String[] args) {

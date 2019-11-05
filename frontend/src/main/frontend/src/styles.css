@@ -1,0 +1,130 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/css/font-awesome.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/primeng/resources/themes/bootstrap/theme.css";
+@import "../node_modules/admin-lte/dist/css/AdminLTE.css";
+@import "../node_modules/admin-lte/dist/css/skins/skin-blue.css";
+
+
+.autocomplete-vertical-style .ui-autocomplete-token {
+  display: list-item;
+}
+
+.ui-autocomplete-token.ui-state-highlight {
+  background-color: #FFFFFF;
+  color: #0a0a0a;
+}
+
+div.progress.progress-xs.progress-vertical{
+  margin: 0 auto;
+}
+
+.progress-verticalbar-yellow{
+  background-color: #f39c12;
+
+}
+.progress-verticalbar-success{
+  background-color: #00a65a;
+}
+
+.progress-verticalbar-danger{
+  background-color:#dd4b39;
+}
+
+.progress-bar-danger{
+  background-color: #F5F5F5;
+  width: 100%
+}
+@media (min-width: 768px) {
+  .sidebar-collapse .main-sidebar {
+    -webkit-transform: translate(-550px, 0);
+    -ms-transform: translate(-550px, 0);
+    -o-transform: translate(-550px, 0);
+    transform: translate(-550px, 0);
+  }}
+
+.content-wrapper, .main-footer {
+  margin-left: 550px;
+}
+
+@media (min-width: 768px){
+  .sidebar-collapse .content-wrapper, .sidebar-collapse .main-footer {
+    margin-left: 0;
+  }}
+
+.skin-blue .main-header .navbar {
+  background-color: #FFFFFF;
+}
+
+.skin-blue .wrapper {
+  background-color: #ecf0f5;
+}
+
+.main-header .navbar .sidebar-toggle:hover {
+  background-color: #8B98AB;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle {
+  color: #3d8dbc
+}
+
+.main-footer{
+  margin-left: 0px;
+}
+
+.comparison-results{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+input.checkbox-validator{
+  width: 5px;
+  margin: 0px;
+  padding: 0px;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+body .autocomplete-vertical-style .ui-button{
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  height: 40px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.40);
+}
+
+body .autocomplete-vertical-style .ui-button:enabled:hover{
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  height: 40px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.60);
+}
+
+body .autocomplete-vertical-style .ui-button:enabled:active{
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  height: 40px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.60);
+}
+
+.ui-autocomplete-token-icon.pi {
+  display: none;
+}
+
+.col-md-5.sliderclass {
+  padding: 20px
+}
+
+.changedvalue {
+  background-color: #F39C12;
+  color: white;
+}
+
+#company-label {
+  background-color: #6ca32a;
+}
+
+.box-primary.container-fluid {
+  overflow-x: auto;
+}

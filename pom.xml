@@ -12,6 +12,7 @@
 		<module>app</module>
 		<module>api</module>
 		<module>cinema1</module>
+		<module>frontend</module>
 	</modules>
 
 	<groupId>at.dkepr</groupId>
