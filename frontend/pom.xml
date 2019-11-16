@@ -61,13 +61,11 @@
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <version>1.4</version>
-
                         <configuration>
                             <nodeVersion>v12.1.0</nodeVersion>
                             <npmVersion>6.9.0</npmVersion>
                             <workingDirectory>src/main/frontend</workingDirectory>
                         </configuration>
-
                         <executions>
                             <execution>
                                 <id>install node and npm</id>
@@ -86,7 +84,6 @@
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
-
                                 <configuration>
                                     <arguments>run build-dev</arguments>
                                 </configuration>
@@ -109,7 +106,6 @@
                             <npmVersion>6.9.0</npmVersion>
                             <workingDirectory>src/main/frontend</workingDirectory>
                         </configuration>
-
                         <executions>
                             <execution>
                                 <id>install node and npm</id>
@@ -117,7 +113,6 @@
                                     <goal>install-node-and-npm</goal>
                                 </goals>
                             </execution>
-
                             <execution>
                                 <id>npm install</id>
                                 <goals>
@@ -129,7 +124,6 @@
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
-
                                 <configuration>
                                     <arguments>run build-test</arguments>
                                 </configuration>
@@ -147,13 +141,11 @@
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <version>1.4</version>
-
                         <configuration>
                             <nodeVersion>v12.1.0</nodeVersion>
                             <npmVersion>6.9.0</npmVersion>
                             <workingDirectory>src/main/frontend</workingDirectory>
                         </configuration>
-
                         <executions>
                             <execution>
                                 <id>install node and npm</id>
@@ -173,7 +165,6 @@
                                 <goals>
                                     <goal>npm</goal>
                                 </goals>
-
                                 <configuration>
                                     <arguments>run build-prod</arguments>
                                 </configuration>
