@@ -9,43 +9,32 @@ public class Cinema1ServiceImpl implements Cinema1Service{
 
     @Override
     public Model getMoviesByDay(String serviceURI, String day) {
-        // direct querying on fuseki server
-        Literal name = null;
         Model model=null;
+        Property property;
+        QuerySolution sol;
         org.apache.jena.rdf.model.Resource resource = null;
+        String recourceOld = "";
+        String recourceNew = "";
+
 
         String service = serviceURI;
         String query = "PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "SELECT * WHERE {?movies <http://www.cinemas.fake/starmovie/movies/dt#days> ?y. FILTER(CONTAINS(?y,'" + day + "'))}";
+                "SELECT * WHERE {?m ?x ?y.{SELECT ?m WHERE {?m <http://www.cinemas.fake/starmovie/movies/dt#days> ?y. FILTER(CONTAINS(?y,'" + day + "'))}}}";
+
         try (QueryExecution qe = QueryExecutionFactory.sparqlService(service, query)) {
-            // create an empty Model
+
             model = ModelFactory.createDefaultModel();
             ResultSet results = qe.execSelect();
             while (results.hasNext()) {
-                QuerySolution sol=results.nextSolution();
-                resource = sol.getResource("movies");
-                //System.out.println(resource);
-
-                String service1 = serviceURI;
-                String query1 = "PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
-                        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "SELECT * WHERE {<" + resource + "> ?x ?y. }";
-
-                QueryExecution qe1 = QueryExecutionFactory.sparqlService(service1, query1);
-                ResultSet results1 = qe1.execSelect();
-
-                // create the resource
-                Resource cinema = model.createResource(resource.toString());
-
-                while (results1.hasNext()) {
-                    QuerySolution sol1 = results1.nextSolution();
-                    org.apache.jena.rdf.model.Resource resource1=sol1.getResource("movies");
-                    Property property = ResourceFactory.createProperty(sol1.get("x").toString());
-                    cinema.addProperty(property, sol1.getLiteral("y"));
-
+                sol = results.nextSolution();
+                recourceNew = sol.getResource("m").toString();
+                if(recourceOld.compareTo(recourceNew) != 0){
+                    resource=model.createResource(sol.getResource("m").toString());
                 }
-
+                recourceOld = recourceNew;
+                property = ResourceFactory.createProperty(sol.get("x").toString());
+                resource.addProperty(property, sol.getLiteral("y"));
             }
 
         }
@@ -63,46 +52,35 @@ public class Cinema1ServiceImpl implements Cinema1Service{
         return m;
     }
 
-    /*
+
     @Override
     public Model getAllReservations(String serviceURI) {
-        // direct querying on fuseki server
-        Literal name = null;
         Model model=null;
+        Property property;
+        QuerySolution sol;
         org.apache.jena.rdf.model.Resource resource = null;
+        String recourceOld = "";
+        String recourceNew = "";
+
 
         String service = serviceURI;
         String query = "PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "SELECT * WHERE {?movies <http://www.cinemas.fake/starmovie/movies/dt#days> ?y.}";
+                "SELECT * WHERE {?m ?x ?y.{SELECT ?y WHERE {?m <http://www.cinemas.fake/starmovie/movies/dt#reservations> ?y.}}}";
+
         try (QueryExecution qe = QueryExecutionFactory.sparqlService(service, query)) {
-            // create an empty Model
+
             model = ModelFactory.createDefaultModel();
             ResultSet results = qe.execSelect();
             while (results.hasNext()) {
-                QuerySolution sol=results.nextSolution();
-                resource = sol.getResource("movies");
-                //System.out.println(resource);
-
-                String service1 = serviceURI;
-                String query1 = "PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
-                        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "SELECT * WHERE {<" + resource + "> ?x ?y. }";
-
-                QueryExecution qe1 = QueryExecutionFactory.sparqlService(service1, query1);
-                ResultSet results1 = qe1.execSelect();
-
-                // create the resource
-                Resource cinema = model.createResource(resource.toString());
-
-                while (results1.hasNext()) {
-                    QuerySolution sol1 = results1.nextSolution();
-                    org.apache.jena.rdf.model.Resource resource1=sol1.getResource("movies");
-                    Property property = ResourceFactory.createProperty(sol1.get("x").toString());
-                    cinema.addProperty(property, sol1.getLiteral("y"));
-
+                sol = results.nextSolution();
+                recourceNew = sol.getResource("m").toString();
+                if(recourceOld.compareTo(recourceNew) != 0){
+                    resource=model.createResource(sol.getResource("m").toString());
                 }
-
+                recourceOld = recourceNew;
+                property = ResourceFactory.createProperty(sol.get("x").toString());
+                resource.addProperty(property, sol.getLiteral("y"));
             }
 
         }
@@ -113,7 +91,43 @@ public class Cinema1ServiceImpl implements Cinema1Service{
         return model;
     }
 
-     */
+    @Override
+    public Model getReservationsByMovie(String serviceURI, String movie) {
+        Model model=null;
+        Property property;
+        QuerySolution sol;
+        org.apache.jena.rdf.model.Resource resource = null;
+        String recourceOld = "";
+        String recourceNew = "";
+
+
+        String service = serviceURI;
+        String query = "PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "SELECT * WHERE {?m ?x ?y.{SELECT ?y WHERE {<http://www.cinemas.fake/starmovie/movies/" + movie + "> <http://www.cinemas.fake/starmovie/movies/dt#reservations> ?y.}}}";
+
+        try (QueryExecution qe = QueryExecutionFactory.sparqlService(service, query)) {
+
+            model = ModelFactory.createDefaultModel();
+            ResultSet results = qe.execSelect();
+            while (results.hasNext()) {
+                sol = results.nextSolution();
+                recourceNew = sol.getResource("m").toString();
+                if(recourceOld.compareTo(recourceNew) != 0){
+                    resource=model.createResource(sol.getResource("m").toString());
+                }
+                recourceOld = recourceNew;
+                property = ResourceFactory.createProperty(sol.get("x").toString());
+                resource.addProperty(property, sol.getLiteral("y"));
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
 
 
 }
