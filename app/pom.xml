@@ -19,6 +19,10 @@
             <groupId>at.dkepr</groupId>
             <artifactId>cinema1</artifactId>
         </dependency>
+        <dependency>
+            <groupId>at.dkepr</groupId>
+            <artifactId>cinema2</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

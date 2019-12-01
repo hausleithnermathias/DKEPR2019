@@ -13,7 +13,8 @@
 		<module>api</module>
 		<module>cinema1</module>
 		<module>frontend</module>
-	</modules>
+        <module>cinema2</module>
+    </modules>
 
 	<groupId>at.dkepr</groupId>
 	<artifactId>cinemaservice</artifactId>
@@ -63,6 +64,11 @@
 			<dependency>
 				<groupId>at.dkepr</groupId>
 				<artifactId>cinema1</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>at.dkepr</groupId>
+				<artifactId>cinema2</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
