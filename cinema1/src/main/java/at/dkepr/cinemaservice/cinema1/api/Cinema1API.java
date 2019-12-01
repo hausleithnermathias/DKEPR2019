@@ -23,4 +23,25 @@ public class Cinema1API {
             return os.toString();
         }
     }
+
+    @RequestMapping(value="/Movies/All", method= RequestMethod.GET, produces={"application/xml", "application/rdf+xml"})
+    public @ResponseBody String getAllMovies() throws IOException {
+        Model model = cinema1Service.getAllMovies("http://localhost:3030/cinema1");
+        try(final ByteArrayOutputStream os = new ByteArrayOutputStream() ){
+            model.write(os);
+            return os.toString();
+        }
+    }
+
+    /*
+    @RequestMapping(value="/Reservations/All", method= RequestMethod.GET, produces={"application/xml", "application/rdf+xml"})
+    public @ResponseBody String getAllReservations() throws IOException {
+        Model model = cinema1Service.getAllReservations("http://localhost:3030/cinema1");
+        try(final ByteArrayOutputStream os = new ByteArrayOutputStream() ){
+            model.write(os);
+            return os.toString();
+        }
+    }
+    */
+
 }
