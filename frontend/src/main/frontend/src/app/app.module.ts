@@ -4,7 +4,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {ContentComponent} from './layout/content/content.component';
-import {FooterComponent} from './layout/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule, SliderModule} from "primeng/primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -13,6 +12,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {NgxCurrencyModule} from "ngx-currency";
 import { CinemaComponent } from './cinema/cinema.component';
+import {CardModule} from 'primeng/card';
 
 export const customCurrencyMaskConfig = {
   align: "left",
@@ -31,7 +31,6 @@ export const customCurrencyMaskConfig = {
     AppComponent,
     HeaderComponent,
     ContentComponent,
-    FooterComponent,
     CinemaComponent,
   ],
   imports: [
@@ -43,6 +42,7 @@ export const customCurrencyMaskConfig = {
     Ng5SliderModule,
     HttpClientModule,
     AutoCompleteModule,
+    CardModule,
     SliderModule,
     ReactiveFormsModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)

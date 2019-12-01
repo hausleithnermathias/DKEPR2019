@@ -128,3 +128,9 @@ body .autocomplete-vertical-style .ui-button:enabled:active{
 .box-primary.container-fluid {
   overflow-x: auto;
 }
+
+
+html,
+body {
+  height: 100%;
+}

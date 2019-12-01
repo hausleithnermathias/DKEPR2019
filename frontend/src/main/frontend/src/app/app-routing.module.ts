@@ -4,10 +4,10 @@ import {CinemaComponent} from "./cinema/cinema.component";
 
 const routes: Routes = [
   {
-    path: 'cinemas/',
+    path: 'cinemas',
     component: CinemaComponent,
   },
-  { path: '',   redirectTo: 'cinemas/', pathMatch: 'full' },
+  { path: '',   redirectTo: 'cinemas', pathMatch: 'full' },
 ];
 
 @NgModule({
