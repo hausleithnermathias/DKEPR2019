@@ -13,6 +13,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {NgxCurrencyModule} from "ngx-currency";
 import { CinemaComponent } from './cinema/cinema.component';
 import {CardModule} from 'primeng/card';
+import {MetaServiceApiService} from "./generated/rest/comparison";
 
 export const customCurrencyMaskConfig = {
   align: "left",
@@ -48,6 +49,7 @@ export const customCurrencyMaskConfig = {
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   providers: [
+    MetaServiceApiService
   ],
   bootstrap: [AppComponent]
 })

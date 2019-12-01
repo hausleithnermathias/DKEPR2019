@@ -18,6 +18,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { Film } from '../model/film';
+import { Kino } from '../model/kino';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -26,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class MetaServiceApiService {
 
-    protected basePath = 'https://localhost:8080';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -56,19 +58,55 @@ export class MetaServiceApiService {
 
 
     /**
-     * getMoviesByDay
+     * getAllCinemas
      * 
-     * @param day day
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMoviesByDayUsingGET1(day: string, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public getMoviesByDayUsingGET1(day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public getMoviesByDayUsingGET1(day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public getMoviesByDayUsingGET1(day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllCinemasUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Kino>>;
+    public getAllCinemasUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Kino>>>;
+    public getAllCinemasUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Kino>>>;
+    public getAllCinemasUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (day === null || day === undefined) {
-            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET1.');
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<Kino>>(`${this.basePath}/service/cinemas/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getAllMovies
+     * 
+     * @param cinema cinema
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllMoviesUsingGET(cinema: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getAllMoviesUsingGET(cinema: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getAllMoviesUsingGET(cinema: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getAllMoviesUsingGET(cinema: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cinema === null || cinema === undefined) {
+            throw new Error('Required parameter cinema was null or undefined when calling getAllMoviesUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -86,7 +124,53 @@ export class MetaServiceApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<string>(`${this.basePath}/test/Movies/${encodeURIComponent(String(day))}`,
+        return this.httpClient.get<Array<Film>>(`${this.basePath}/service/movies/${encodeURIComponent(String(cinema))}/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getMoviesByDay
+     * 
+     * @param cinema cinema
+     * @param day day
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cinema === null || cinema === undefined) {
+            throw new Error('Required parameter cinema was null or undefined when calling getMoviesByDayUsingGET.');
+        }
+
+        if (day === null || day === undefined) {
+            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<Film>>(`${this.basePath}/service/movies/${encodeURIComponent(String(cinema))}/${encodeURIComponent(String(day))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -122,7 +206,7 @@ export class MetaServiceApiService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<string>(`${this.basePath}/test`,
+        return this.httpClient.get<string>(`${this.basePath}/service`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

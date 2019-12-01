@@ -4,10 +4,12 @@ import at.dkepr.cinemaservice.cinema2.services.Cinema2Service;
 import org.apache.jena.rdf.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+@ApiIgnore
 @RestController
 @RequestMapping("/Cinema2")
 public class Cinema2API {

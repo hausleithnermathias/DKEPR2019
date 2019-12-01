@@ -21,73 +21,26 @@
             "description": "Basic Error Controller"
         },
         {
-            "name": "cinema-1-api",
-            "description": "Cinema 1 API"
-        },
-        {
             "name": "meta-service-api",
             "description": "Meta Service API"
         }
     ],
     "paths": {
-        "/Cinema1/Movies/{day}": {
-            "get": {
-                "tags": [
-                    "cinema-1-api"
-                ],
-                "summary": "getMoviesByDay",
-                "operationId": "getMoviesByDayUsingGET",
-                "produces": [
-                    "application/xml",
-                    "application/rdf+xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "day",
-                        "in": "path",
-                        "description": "day",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
         "/error": {
             "get": {
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingGET",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingGET",
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "401": {
@@ -106,22 +59,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingHEAD",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingHEAD",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -140,22 +90,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPOST",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPOST",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "201": {
@@ -177,22 +124,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPUT",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPUT",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "201": {
@@ -214,19 +158,16 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingDELETE",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingDELETE",
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -245,22 +186,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingOPTIONS",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingOPTIONS",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -279,22 +217,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPATCH",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPATCH",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -310,7 +245,7 @@
                 "deprecated": false
             }
         },
-        "/test": {
+        "/service": {
             "get": {
                 "tags": [
                     "meta-service-api"
@@ -340,17 +275,99 @@
                 "deprecated": false
             }
         },
-        "/test/Movies/{day}": {
+        "/service/cinemas/all": {
+            "get": {
+                "tags": [
+                    "meta-service-api"
+                ],
+                "summary": "getAllCinemas",
+                "operationId": "getAllCinemasUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Kino"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/service/movies/{cinema}/all": {
+            "get": {
+                "tags": [
+                    "meta-service-api"
+                ],
+                "summary": "getAllMovies",
+                "operationId": "getAllMoviesUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "cinema",
+                        "in": "path",
+                        "description": "cinema",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Film"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/service/movies/{cinema}/{day}": {
             "get": {
                 "tags": [
                     "meta-service-api"
                 ],
                 "summary": "getMoviesByDay",
-                "operationId": "getMoviesByDayUsingGET_1",
+                "operationId": "getMoviesByDayUsingGET",
                 "produces": [
                     "*/*"
                 ],
                 "parameters": [
+                    {
+                        "name": "cinema",
+                        "in": "path",
+                        "description": "cinema",
+                        "required": true,
+                        "type": "string"
+                    },
                     {
                         "name": "day",
                         "in": "path",
@@ -363,7 +380,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Film"
+                            }
                         }
                     },
                     "401": {
@@ -381,6 +401,97 @@
         }
     },
     "definitions": {
+        "Film": {
+            "type": "object",
+            "discriminator": "loB",
+            "properties": {
+                "altersfreigabe": {
+                    "type": "string",
+                    "description": "Altersfreigabe"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "Ort und Erscheinungsjahr"
+                },
+                "filmproduzent": {
+                    "type": "array",
+                    "description": "Filmproduzent",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "genre": {
+                    "type": "string",
+                    "description": "Genre"
+                },
+                "reservierungen": {
+                    "type": "object",
+                    "description": "Reservierungen pro Tag",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "schauspieler": {
+                    "type": "array",
+                    "description": "Schauspieler",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "spieldauer": {
+                    "type": "string",
+                    "description": "Dauer des Films"
+                },
+                "spieltage": {
+                    "type": "array",
+                    "description": "Tage, an denen der Film gespielt wird",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Montag",
+                            "Dienstag",
+                            "Mittwoch",
+                            "Donnerstag",
+                            "Freitag",
+                            "Samstag",
+                            "Sonntag"
+                        ]
+                    }
+                },
+                "sprache": {
+                    "type": "string",
+                    "description": "Sprache des Films"
+                },
+                "titel": {
+                    "type": "string",
+                    "description": "Filmtitel"
+                }
+            },
+            "title": "Film",
+            "description": "Film"
+        },
+        "Kino": {
+            "type": "object",
+            "discriminator": "loB",
+            "properties": {
+                "Filme": {
+                    "type": "array",
+                    "description": "Kinoprogramm",
+                    "items": {
+                        "$ref": "#/definitions/Film"
+                    }
+                },
+                "Kino": {
+                    "type": "string",
+                    "description": "Name des Kinos"
+                }
+            },
+            "title": "Kino",
+            "description": "Kino"
+        },
         "ModelAndView": {
             "type": "object",
             "properties": {

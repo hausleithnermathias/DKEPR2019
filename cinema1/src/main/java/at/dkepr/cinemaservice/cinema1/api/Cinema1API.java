@@ -1,13 +1,16 @@
 package at.dkepr.cinemaservice.cinema1.api;
 
 import at.dkepr.cinemaservice.cinema1.services.Cinema1Service;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.jena.rdf.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+@ApiIgnore
 @RestController
 @RequestMapping("/Cinema1")
 public class Cinema1API {
@@ -32,6 +35,8 @@ public class Cinema1API {
             return os.toString();
         }
     }
+
+
 
     /*
     @RequestMapping(value="/Reservations/All", method= RequestMethod.GET, produces={"application/xml", "application/rdf+xml"})

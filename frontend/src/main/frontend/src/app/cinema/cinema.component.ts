@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Kino, MetaServiceApiService} from "../generated/rest/comparison";
 
 @Component({
   selector: 'app-cinema',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CinemaComponent implements OnInit {
 
-  constructor() { }
+  private cinemaList: Kino[] = []
+
+  constructor(private cinemaService: MetaServiceApiService) { }
 
   ngOnInit() {
+    this.cinemaService.getAllCinemasUsingGET().subscribe(cinemas =>{
+      this.cinemaList = cinemas
+
+      console.log(this.cinemaList)
+    })
+
+
   }
 
 }
