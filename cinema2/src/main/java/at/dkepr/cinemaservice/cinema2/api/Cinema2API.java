@@ -52,4 +52,13 @@ public class Cinema2API {
             return os.toString();
         }
     }
+
+    @RequestMapping(value="/Movies/Menus", method= RequestMethod.GET, produces={"application/xml", "application/rdf+xml"})
+    public @ResponseBody String getMenus() throws IOException {
+        Model model = cinema2Service.getMenus("http://localhost:3030/cinema2");
+        try(final ByteArrayOutputStream os = new ByteArrayOutputStream() ){
+            model.write(os);
+            return os.toString();
+        }
+    }
 }
