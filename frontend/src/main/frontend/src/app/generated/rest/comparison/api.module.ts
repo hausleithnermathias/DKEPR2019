@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { BasicErrorControllerService } from './api/basicErrorController.service';
+import { Cinema1ApiService } from './api/cinema1Api.service';
 import { MetaServiceApiService } from './api/metaServiceApi.service';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { MetaServiceApiService } from './api/metaServiceApi.service';
   exports:      [],
   providers: [
     BasicErrorControllerService,
+    Cinema1ApiService,
     MetaServiceApiService ]
 })
 export class ApiModule {

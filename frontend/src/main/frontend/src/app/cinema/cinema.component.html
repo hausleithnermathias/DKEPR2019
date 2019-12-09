@@ -1,11 +1,46 @@
-<div style="height: 100%">
-  <div class="row" style="padding: 25px 25px 25px 25px; background-color: #b8c7ce">
-    <div class="col-lg-6">
-      <p-card class="cinema-card" [style] = "{background: '#8F8F8F'}"></p-card>
-    </div>
-    <div class="col-lg-6">
-      <p-card class="cinema-card" [style] = "{background: '#8F8F8F'}"></p-card>
-    </div>
+<div style="height: 100%" *ngIf="cinemaList">
+  <div class="row">
+    <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
+      <div class="ui-card ui-widget ui-widget-content ui-corner-all" style="width: 360px; margin-left: 20px; margin-right: 20px;"
+           *ngFor="let c of cinemaList; let i = index;">
+        <div class="ui-card-body">
+          <div class="ui-card-title ng-star-inserted">
+            {{c.kino}}
+          </div>
+          <div class="ui-card-content">
+            <button pButton type="button" label="Zum Kinoprogramm" (click)="showMovies(i)"></button>
+          </div>
+        </div>
+      </div>
+    </p-card>
   </div>
 
+  <div clasS="row" *ngIf="this.cinemaSelected">
+    <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
+      <div class="ui-card ui-widget ui-widget-content ui-corner-all col-md-6" style="position: center"
+           *ngFor="let movie of cinemaSelected.filme">
+        <div class="ui-card-body">
+          <div class="ui-card-title ng-star-inserted">
+            {{movie.titel}}
+          </div>
+          <div class="ui-card-content">
+            <div class="container">
+              <div class="row">
+                Altersfreigabe: {{movie.altersfreigabe}}
+              </div>
+              <div class="row">
+                Genre: {{movie.genre}}
+              </div>
+              <div class="row">
+                Dauer: {{movie.spieldauer}}
+              </div>
+              <div class="row">
+                Sprache: {{movie.sprache}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
 </div>

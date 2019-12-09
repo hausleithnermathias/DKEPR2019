@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@ApiModel(value = "Film", description = "Film", discriminator = "loB")
+@ApiModel(value = "film", description = "Film", discriminator = "loB")
 public class Movie {
 
     public Movie() {

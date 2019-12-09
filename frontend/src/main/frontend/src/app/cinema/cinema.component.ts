@@ -8,18 +8,22 @@ import {Kino, MetaServiceApiService} from "../generated/rest/comparison";
 })
 export class CinemaComponent implements OnInit {
 
-  private cinemaList: Kino[] = []
+  private cinemaList: Kino[]
+  private isCinemaSelected: boolean = false
+  private cinemaSelected: Kino = {}
 
   constructor(private cinemaService: MetaServiceApiService) { }
 
   ngOnInit() {
     this.cinemaService.getAllCinemasUsingGET().subscribe(cinemas =>{
+
       this.cinemaList = cinemas
-
-      console.log(this.cinemaList)
     })
+  }
 
-
+  showMovies(i: number){
+    this.cinemaSelected = this.cinemaList[i]
+    this.isCinemaSelected = true
   }
 
 }

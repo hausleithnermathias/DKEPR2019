@@ -100,13 +100,13 @@ export class MetaServiceApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllMoviesUsingGET(cinema: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
-    public getAllMoviesUsingGET(cinema: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
-    public getAllMoviesUsingGET(cinema: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
-    public getAllMoviesUsingGET(cinema: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllMoviesUsingGET1(cinema: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getAllMoviesUsingGET1(cinema: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getAllMoviesUsingGET1(cinema: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getAllMoviesUsingGET1(cinema: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (cinema === null || cinema === undefined) {
-            throw new Error('Required parameter cinema was null or undefined when calling getAllMoviesUsingGET.');
+            throw new Error('Required parameter cinema was null or undefined when calling getAllMoviesUsingGET1.');
         }
 
         let headers = this.defaultHeaders;
@@ -142,17 +142,17 @@ export class MetaServiceApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
-    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
-    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
-    public getMoviesByDayUsingGET(cinema: string, day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getMoviesByDayUsingGET1(cinema: string, day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (cinema === null || cinema === undefined) {
-            throw new Error('Required parameter cinema was null or undefined when calling getMoviesByDayUsingGET.');
+            throw new Error('Required parameter cinema was null or undefined when calling getMoviesByDayUsingGET1.');
         }
 
         if (day === null || day === undefined) {
-            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET.');
+            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET1.');
         }
 
         let headers = this.defaultHeaders;

@@ -8,15 +8,15 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@ApiModel(value = "Kino", description = "Kino", discriminator = "loB")
+@ApiModel(value = "kino", description = "Kino", discriminator = "loB")
 public class Cinema {
 
     @ApiModelProperty(required = false, value = "Name des Kinos")
-    @JsonProperty("Kino")
+    @JsonProperty("kino")
     private String name;
 
     @ApiModelProperty(required = false, value = "Kinoprogramm")
-    @JsonProperty("Filme")
+    @JsonProperty("filme")
     private List<Movie> movies;
 
 }
