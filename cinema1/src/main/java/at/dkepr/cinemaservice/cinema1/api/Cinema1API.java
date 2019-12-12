@@ -51,5 +51,15 @@ public class Cinema1API {
         }
     }
 
+    @RequestMapping(value="/Reservation/{movie}", consumes= "text/plain", method= RequestMethod.POST, produces={"application/xml", "application/rdf+xml"})
+    public void addReservation(@PathVariable String movie, @RequestBody String reservation) throws IOException {
+       try {
+           System.out.println(reservation);
+       }
+       catch(Exception e) {
+           e.printStackTrace();
+       }
+    }
+
 
 }
