@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class MetaServiceImpl {
 
-    public List<Movie> getMovies(Model model){
+    public List<Movie> getMoviesCinema1(Model model){
         List<Movie> movieList = Lists.newArrayList();
         Movie movie = new Movie();
         // list the statements in the Model
@@ -86,12 +86,49 @@ public class MetaServiceImpl {
         return movieList;
     }
 
+    public List<Movie> getMoviesCinema2(Model model){
+        List<Movie> movieList = Lists.newArrayList();
+        Movie movie = new Movie();
+        // list the statements in the Model
+        StmtIterator iter = model.listStatements();
+        org.apache.jena.rdf.model.Resource subject = null;
+        Property predicate;
+        RDFNode object;
+        // print out the predicate, subject and object of each statement
+        while (iter.hasNext()) {
+            Statement stmt = iter.nextStatement();  // get next statement
+            if(subject == null){
+                subject = stmt.getSubject();
+            }
+            if(!subject.getLocalName().equals(stmt.getSubject().getLocalName())){
+                movieList.add(movie);
+                movie = new Movie();
+            }
+            subject = stmt.getSubject(); // get the subject
+            predicate = stmt.getPredicate();   // get the predicate
+            object = stmt.getObject();// get the object
+            String[] properties;
+
+            switch(predicate.getLocalName()){
+                // TODO
+            }
+        }
+        movieList.add(movie);
+        return movieList;
+    }
+
     public List<Movie> getMoviesByDay(String cinema, String day){
 
         Model model = ModelFactory.createDefaultModel();
         model.read("http://localhost:8080/" + cinema + "/Movies/" + day);
 
-        return getMovies(model);
+        switch(cinema) {
+            case "Cinema1":
+                return getMoviesCinema1(model);
+            case "Cinema2":
+                return getMoviesCinema2(model);
+        }
+        return null;
     }
 
     public List<Movie> getAllMovies(String cinema){
@@ -99,7 +136,13 @@ public class MetaServiceImpl {
         Model model = ModelFactory.createDefaultModel();
         model.read("http://localhost:8080/" + cinema + "/Movies/All");
 
-        return getMovies(model);
+        switch(cinema) {
+            case "Cinema1":
+                return getMoviesCinema1(model);
+            case "Cinema2":
+                return getMoviesCinema2(model);
+        }
+        return null;
     }
 
     public List<Cinema> getAllCinemas(){
