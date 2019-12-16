@@ -110,7 +110,47 @@ public class MetaServiceImpl {
             String[] properties;
 
             switch(predicate.getLocalName()){
-                // TODO
+                case "title":
+                    movie.setTitle(object.toString());
+                    break;
+                case "actors":
+                    properties = object.toString().split(", ");
+                    for(int i = 0; i<properties.length; i++){
+                        movie.getActors().add(properties[i]);
+                    }
+                    break;
+
+                case "genre":
+                    movie.setGenre(object.toString());
+                    break;
+                case "duration":
+                    movie.setMovieLength(object.toString());
+                    break;
+                case "language":
+                    movie.setLanguage(object.toString());
+                    break;
+                case "reservations":
+                    properties = object.toString().split(";");
+                    for(int i = 0; i<properties.length; i++){
+                        String[] subProperties = properties[i].split(":");
+                        movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(subProperties[0].trim());
+                    }
+                    break;
+                case "menu" :
+                    properties = object.toString().split(",");
+                    for(int i = 0; i<properties.length; i++){
+                        movie.getMenu().add(properties[i].trim());
+                    }
+                    break;
+                case "FSK":
+                    movie.setAgeRating(object.toString());
+                    break;
+                case "days":
+                    properties = object.toString().split(";");
+                    for(int i = 0; i<properties.length; i++){
+                        movie.getDaysPlayed().add(WeekDayEnum.valueOf(properties[i].trim()));
+                    }
+                    break;
             }
         }
         movieList.add(movie);

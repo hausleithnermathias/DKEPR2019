@@ -66,6 +66,10 @@ public class Movie {
     @JsonProperty("filmproduzent")
     private List<String> producer;
 
+    @ApiModelProperty(required = false, value = "Menus")
+    @JsonProperty("menus")
+    private List<String> menus;
+
     public List<WeekDayEnum> getDaysPlayed() {
         if (daysPlayed == null) {
             daysPlayed = Lists.newArrayList();
@@ -89,5 +93,13 @@ public class Movie {
             producer = Lists.newArrayList();
         }
         return producer;
+    }
+
+
+    public List<String> getMenu() {
+        if (menus == null) {
+            menus = Lists.newArrayList();
+        }
+        return menus;
     }
 }
