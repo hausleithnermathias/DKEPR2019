@@ -2,12 +2,15 @@ package at.dkepr.cinemaservice.cinema2.services;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
-import org.apache.jena.rdf.model.Resource;
 
 @Service
 public class Cinema2ServiceImpl implements Cinema2Service{
-    String queryPattern = "PREFIX fi: <http://www.cinemas.fake/starmovie/movies/info#/>\n" +
+    String queryPattern = "PREFIX fi: <http://www.cinemas.fake/megaplex/movies/info#/>\n" +
                           "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n";
 
     @Override
@@ -42,6 +45,77 @@ public class Cinema2ServiceImpl implements Cinema2Service{
         String query = queryPattern + "SELECT * WHERE {?m ?x ?y.{SELECT ?m WHERE {?m <http://www.cinemas.fake/megaplex/movies/info#genre> ?y. FILTER(CONTAINS(?y,'" + genre + "'))}}}";
         return queryProcessing(URL, query,null);
     }
+
+    @Override
+    public void addReservationToMovie(String movieName, String reservation) {
+        updateTables(movieName, "reservations", reservation, true);
+    }
+
+    @Override
+    public void addMenuToMovie(String movieName, String menu) {
+        updateTables(movieName, "menu", menu, true);
+    }
+
+    @Override
+    public void removeMenuFromMovie(String movieName, String menu) {
+        updateTables(movieName, "menu", menu, false);
+    }
+
+    @Override
+    public void removeReservationFromMovie(String movieName, String reservation) {
+        updateTables(movieName, "reservations", reservation,false);
+    }
+
+    private void updateTables(String movieName, String type, String text, boolean add) {
+        String query = queryPattern +  "SELECT * WHERE {?m ?x ?y.{SELECT ?m WHERE {?m <http://www.cinemas.fake/megaplex/movies/info#title> ?y. FILTER(CONTAINS(?y,'" + movieName + "'))}}}";
+        String service = "http://localhost:3030/cinema2";
+        QuerySolution sol = null;
+        Resource res = null;
+        String property = "";
+        String object = "";
+        UpdateRequest update = null;
+        UpdateProcessor exec = null;
+
+
+        try (QueryExecution qe = QueryExecutionFactory.sparqlService(service, query)) {
+
+            ResultSet results = qe.execSelect();
+
+            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/megaplex/movies/" + movieName.toLowerCase() + "> <http://www.cinemas.fake/megaplex/movies/info#" + type +"> ?o}");
+            exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema2");
+            exec.execute();
+
+            while (results.hasNext()) {
+                sol = results.nextSolution();
+                res = sol.getResource("m");
+                property = sol.get("x").toString();
+
+                if(property.toString().toLowerCase().contains(type)) {
+                    if(add) {
+                        object = sol.getLiteral("y").toString() + text + "; ";
+                    }
+                    else if(!add) {
+                        object = sol.getLiteral("y").toString();
+                        String[] splitArray = object.split(";");
+                        object = "";
+                        for(int i = 0; i < splitArray.length; i++) {
+                            if(splitArray[i].trim().equals(text.trim())) { }
+                            else
+                                object += splitArray[i] + "; ";
+                        }
+                    }
+                    update = UpdateFactory.create("INSERT DATA{<" + res + "> <" + property + "> \"" + object + "\"}");
+                    exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema2");
+                    exec.execute();
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public Model queryProcessing(String service, String query, String queryExtension) {
         Model model = null;
