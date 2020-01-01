@@ -1,7 +1,79 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <div class="col-md-10">
+      <h4 class="modal-title" id="modal-basic-title">{{movieSelected.titel}}</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="container" style="width: 100%">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            Altersfreigabe: {{movieSelected.altersfreigabe}}
+          </div>
+          <div class="row">
+            Genre: {{movieSelected.genre}}
+          </div>
+          <div class="row">
+            Dauer: {{movieSelected.spieldauer}}
+          </div>
+          <div class="row">
+            Sprache: {{movieSelected.sprache}}
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 10px; font-size: 20px">
+        <b>Ihre Reservierung:</b>
+      </div>
+      <form #myForm="ngForm" action="#" *ngIf="movieSelected" (ngSubmit)="onSubmit()" class="user-panel" novalidate>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Tag der Reservierung </label>
+            </div>
+            <div class="col-md-6">
+              <select [(ngModel)]="daySelected" name="selectedDay"
+                      class="form-control" [required]="true">
+                <option *ngFor="let tag of movieSelected.spieltage" [ngValue]="tag.valueOf()">{{tag}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Name </label>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <input type="text" class="form-control" name="personName"
+                       [(ngModel)]="personSelected" [required]="true">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button [disabled]="!myForm.valid" pButton type="submit" (click)="modal.close('Save click'); onSubmit()"
+                  label=" Jetzt reservieren"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</ng-template>
+
 <div style="height: 100%" *ngIf="cinemaList">
   <div class="row">
     <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
-      <div class="ui-card ui-widget ui-widget-content ui-corner-all" style="width: 360px; margin-left: 20px; margin-right: 20px;"
+      <div class="ui-card ui-widget ui-widget-content ui-corner-all"
+           style="width: 360px; margin-left: 20px; margin-right: 20px;"
            *ngFor="let c of cinemaList; let i = index;">
         <div class="ui-card-body">
           <div class="ui-card-title ng-star-inserted">
@@ -15,7 +87,7 @@
     </p-card>
   </div>
 
-  <div clasS="row" *ngIf="this.cinemaSelected">
+  <div class="row" *ngIf="this.cinemaSelected">
     <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
       <div class="ui-card ui-widget ui-widget-content ui-corner-all col-md-6" style="position: center"
            *ngFor="let movie of cinemaSelected.filme">
@@ -24,18 +96,31 @@
             {{movie.titel}}
           </div>
           <div class="ui-card-content">
-            <div class="container">
-              <div class="row">
-                Altersfreigabe: {{movie.altersfreigabe}}
+            <div class="container" style="width: 100%">
+              <div class="col-md-4">
+                <div class="row">
+                  Altersfreigabe: {{movie.altersfreigabe}}
+                </div>
+                <div class="row">
+                  Genre: {{movie.genre}}
+                </div>
+                <div class="row">
+                  Dauer: {{movie.spieldauer}}
+                </div>
+                <div class="row">
+                  Sprache: {{movie.sprache}}
+                </div>
               </div>
-              <div class="row">
-                Genre: {{movie.genre}}
+              <div class="col-md-2">
+                <div>Spieltage</div>
               </div>
-              <div class="row">
-                Dauer: {{movie.spieldauer}}
+              <div class="col-md-2">
+                <ul style="list-style-type:none; padding-inline-start: 0; margin-bottom: 0" *ngFor="let tag of movie.spieltage">
+                  <li style="padding-left: 0">{{tag}}</li>
+                </ul>
               </div>
-              <div class="row">
-                Sprache: {{movie.sprache}}
+              <div class="col-md-4" style="padding-left: 60px">
+                <button pButton type="button" (click)="open(content, movie)" label="Reservieren"></button>
               </div>
             </div>
           </div>

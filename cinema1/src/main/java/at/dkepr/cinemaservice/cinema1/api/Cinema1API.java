@@ -4,10 +4,12 @@ import at.dkepr.cinemaservice.cinema1.services.Cinema1Service;
 import org.apache.jena.rdf.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+@ApiIgnore
 @RestController
 @RequestMapping("/Cinema1")
 public class Cinema1API {
@@ -51,7 +53,7 @@ public class Cinema1API {
         }
     }
 
-    @RequestMapping(value="/Reservation/{movie}", consumes= "text/plain", method= RequestMethod.POST, produces={"application/xml", "application/rdf+xml"})
+    @RequestMapping(value="/Reservation/{movie}", consumes= "text/plain", method= RequestMethod.POST)
     public void addReservation(@PathVariable String movie, @RequestBody String reservation) throws IOException {
        try {
            System.out.println(reservation);
@@ -60,6 +62,5 @@ public class Cinema1API {
            e.printStackTrace();
        }
     }
-
 
 }

@@ -129,7 +129,13 @@ body .autocomplete-vertical-style .ui-button:enabled:active{
   overflow-x: auto;
 }
 
+.fade{
+  opacity: unset;
+}
 
+.modal-dialog{
+  top: 70px;
+}
 html,
 body {
   height: 100%;

@@ -7,13 +7,13 @@ import {ContentComponent} from './layout/content/content.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule, SliderModule} from "primeng/primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {Ng5SliderModule} from 'ng5-slider';
 import {HttpClientModule} from "@angular/common/http";
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {NgxCurrencyModule} from "ngx-currency";
 import { CinemaComponent } from './cinema/cinema.component';
 import {CardModule} from 'primeng/card';
 import {MetaServiceApiService} from "./generated/rest/comparison";
+import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 export const customCurrencyMaskConfig = {
   align: "left",
@@ -40,18 +40,18 @@ export const customCurrencyMaskConfig = {
     FormsModule,
     CalendarModule,
     BrowserAnimationsModule,
-    Ng5SliderModule,
     HttpClientModule,
     AutoCompleteModule,
     CardModule,
-    SliderModule,
     ReactiveFormsModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    BrowserModule,
+    NgbModule
   ],
   providers: [
     MetaServiceApiService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 
