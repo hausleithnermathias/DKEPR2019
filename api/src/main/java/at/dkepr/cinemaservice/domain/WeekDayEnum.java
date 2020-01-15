@@ -14,7 +14,6 @@ public enum WeekDayEnum {
     Sa("Samstag"),
     So("Sonntag");
 
-    private String key;
     private String value;
 
 
