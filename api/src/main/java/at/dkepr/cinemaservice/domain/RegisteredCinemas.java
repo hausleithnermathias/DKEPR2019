@@ -2,7 +2,6 @@ package at.dkepr.cinemaservice.domain;
 
 public enum RegisteredCinemas {
     STARMOVIE("Starmovie"),
-    GEIL("Geil"),
     MEGAPLEX("Megaplex");
 
     public String value;

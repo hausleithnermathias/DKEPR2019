@@ -1,9 +1,6 @@
 package at.dkepr.cinemaservice.core;
 
-import at.dkepr.cinemaservice.domain.Cinema;
-import at.dkepr.cinemaservice.domain.Movie;
-import at.dkepr.cinemaservice.domain.RegisteredCinemas;
-import at.dkepr.cinemaservice.domain.WeekDayEnum;
+import at.dkepr.cinemaservice.domain.*;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.jena.rdf.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +71,9 @@ public class MetaServiceImpl {
                     properties = object.toString().split(";");
                     for(int i = 0; i<properties.length; i++){
                         String[] subProperties = properties[i].split(":");
-                        if(subProperties[0].compareTo("") != 0 && subProperties.length > 1)
-                        movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(subProperties[0].trim());
+                        if(subProperties[0].compareTo("") != 0 && subProperties.length > 1) {
+                            movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(new Reservation(subProperties[0].trim(), false, subProperties[1].trim()));
+                        }
                     }
                     break;
                 case "days":
@@ -144,7 +142,7 @@ public class MetaServiceImpl {
                     for(int i = 0; i<properties.length; i++){
                         String[] subProperties = properties[i].split(":");
                         if(subProperties[0].compareTo("") != 0 && subProperties.length > 1)
-                        movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(subProperties[0].trim());
+                            movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(new Reservation(subProperties[0].trim(), Boolean.parseBoolean(subProperties[2].trim()), subProperties[1].trim()));
                     }
                     break;
                 case "menu" :
@@ -179,8 +177,6 @@ public class MetaServiceImpl {
                 return getMoviesCinema1(model);
             case MEGAPLEX:
                 return getMoviesCinema2(model);
-            case GEIL:
-                return getMoviesCinema1(model);
         }
         return null;
     }
@@ -196,8 +192,6 @@ public class MetaServiceImpl {
                 return getMoviesCinema1(model);
             case MEGAPLEX:
                 return getMoviesCinema2(model);
-            case GEIL:
-                return getMoviesCinema1(model);
         }
         return null;
     }
@@ -216,11 +210,13 @@ public class MetaServiceImpl {
         return cinemas;
     }
 
-    public void removeReservation(String cinema, String movie, String reservation) {
-        restTemplate.postForLocation("http://localhost:8080/" + cinema + "/Remove/Reservation/" + movie, reservation);
+    public void removeReservation(String cinema, String movie, Reservation reservation) {
+        String url = environment.getProperty(cinema.toLowerCase() + ".url");
+        restTemplate.postForLocation(url + "/Remove/Reservation/" + movie, reservation.getName() + ": " + reservation.getDay() + ": " + Boolean.toString(reservation.getMenu()));
     }
 
-    public void createReservation(String cinema, String movie, String reservation) {
-        restTemplate.postForLocation("http://localhost:8080/" + cinema + "/Create/Reservation/" + movie, reservation);
+    public void createReservation(String cinema, String movie, Reservation reservation) {
+        String url = environment.getProperty(cinema.toLowerCase() + ".url");
+        restTemplate.postForLocation(url + "/Create/Reservation/" + movie, reservation.getName() + ": " + reservation.getDay() + ": " + Boolean.toString(reservation.getMenu()));
     }
 }

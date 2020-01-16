@@ -3,6 +3,7 @@ package at.dkepr.cinemaservice.externalAPI;
 import at.dkepr.cinemaservice.core.MetaServiceImpl;
 import at.dkepr.cinemaservice.domain.Cinema;
 import at.dkepr.cinemaservice.domain.Movie;
+import at.dkepr.cinemaservice.domain.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class MetaServiceAPI {
     }
 
     @RequestMapping(value="/Remove/Reservation/{cinema}/{movie}", consumes= "text/plain", method= RequestMethod.POST)
-    public void removeReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody String reservation) throws IOException {
+    public void removeReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody Reservation reservation) throws IOException {
         try {
             metaService.removeReservation(cinema, movie, reservation);
         }
@@ -52,7 +53,7 @@ public class MetaServiceAPI {
     }
 
     @RequestMapping(value="/Create/Reservation/{cinema}/{movie}", consumes= "text/plain", method= RequestMethod.POST)
-    public void createReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody String reservation) throws IOException {
+    public void createReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody Reservation reservation) throws IOException {
         try {
             metaService.createReservation(cinema, movie, reservation);
         }

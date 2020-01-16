@@ -55,7 +55,7 @@ public class Movie {
 
     @ApiModelProperty(required = false, value = "Reservierungen pro Tag")
     @JsonProperty("reservierungen")
-    private Map<WeekDayEnum, List<String>> reservations;
+    private Map<WeekDayEnum, List<Reservation>> reservations;
 
     @ApiModelProperty(required = false, value = "Schauspieler")
     @JsonProperty("schauspieler")
@@ -76,7 +76,7 @@ public class Movie {
         return daysPlayed;
     }
 
-    public Map<WeekDayEnum, List<String>> getReservations() {
+    public Map<WeekDayEnum, List<Reservation>> getReservations() {
         return reservations;
     }
 
