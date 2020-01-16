@@ -210,6 +210,7 @@ public class MetaServiceImpl {
             Cinema cinema = new Cinema();
             cinema.setName(registeredCinema.value);
             cinema.setMovies(getAllMovies(registeredCinema.value));
+            cinema.setMenuPossible(Boolean.parseBoolean(environment.getProperty(cinema.getName().toLowerCase()+".menu")));
             cinemas.add(cinema);
         }
         return cinemas;

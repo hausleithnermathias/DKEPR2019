@@ -19,4 +19,7 @@ public class Cinema {
     @JsonProperty("filme")
     private List<Movie> movies;
 
+    @ApiModelProperty(required = false, value = "Menu moeglich")
+    @JsonProperty("menu")
+    private boolean menuPossible;
 }
