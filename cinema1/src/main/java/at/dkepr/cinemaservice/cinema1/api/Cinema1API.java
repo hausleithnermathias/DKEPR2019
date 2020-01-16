@@ -63,4 +63,24 @@ public class Cinema1API {
        }
     }
 
+    @RequestMapping(value="/Remove/Reservation/{movie}", consumes= "text/plain", method= RequestMethod.POST, produces={"application/xml", "application/rdf+xml"})
+    public void removeReservation(@PathVariable String movie, @RequestBody String reservation) throws IOException {
+        try {
+            cinema1Service.removeReservationFromMovie(movie, reservation);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/Create/Reservation/{movie}", consumes= "text/plain", method= RequestMethod.POST, produces={"application/xml", "application/rdf+xml"})
+    public void addReservationToMovie(@PathVariable String movie, @RequestBody String reservation) throws IOException {
+        try {
+            cinema1Service.addReservationToMovie(movie, reservation);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

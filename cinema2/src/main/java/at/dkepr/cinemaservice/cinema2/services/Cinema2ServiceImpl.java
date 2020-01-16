@@ -98,7 +98,7 @@ public class Cinema2ServiceImpl implements Cinema2Service{
                         object = sol.getLiteral("y").toString();
                         String[] splitArray = object.split(";");
                         object = "";
-                        for(int i = 0; i < splitArray.length; i++) {
+                        for(int i = 0; i < splitArray.length-1; i++) {
                             if(splitArray[i].trim().equals(text.trim())) { }
                             else
                                 object += splitArray[i] + "; ";

@@ -23,7 +23,6 @@ public class Movie {
         reservations.put(WeekDayEnum.Fr, Lists.newArrayList());
         reservations.put(WeekDayEnum.Sa, Lists.newArrayList());
         reservations.put(WeekDayEnum.So, Lists.newArrayList());
-
     }
 
     @ApiModelProperty(required = false, value = "Filmtitel")

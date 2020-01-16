@@ -2,6 +2,10 @@ package at.dkepr.cinemaservice.cinema1.services;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -129,5 +133,66 @@ public class Cinema1ServiceImpl implements Cinema1Service{
         return model;
     }
 
+
+    @Override
+    public void removeReservationFromMovie(String movieName, String reservation) {
+        updateTables(movieName, "reservations", reservation,false);
+    }
+
+    private void updateTables(String movieName, String type, String text, boolean add) {
+        String query ="PREFIX dt: <http://www.cinemas.fake/starmovie/movies/dt#/>\n" +
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +  "SELECT * WHERE {?m ?x ?y.{SELECT ?m WHERE {?m <http://www.cinemas.fake/starmovie/movies/dt#title> ?y. FILTER(CONTAINS(?y,'" + movieName + "'))}}}";
+        String service = "http://localhost:3030/cinema1";
+        QuerySolution sol = null;
+        Resource res = null;
+        String property = "";
+        String object = "";
+        UpdateRequest update = null;
+        UpdateProcessor exec = null;
+
+
+        try (QueryExecution qe = QueryExecutionFactory.sparqlService(service, query)) {
+
+            ResultSet results = qe.execSelect();
+
+            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/starmovie/movies/" + movieName.toLowerCase() + "> <http://www.cinemas.fake/starmovie/movies/dt#" + type +"> ?o}");
+            exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema1");
+            exec.execute();
+
+            while (results.hasNext()) {
+                sol = results.nextSolution();
+                res = sol.getResource("m");
+                property = sol.get("x").toString();
+
+                if(property.toString().toLowerCase().contains(type)) {
+                    if(add) {
+                        object = sol.getLiteral("y").toString() + text + "; ";
+                    }
+                    else if(!add) {
+                        object = sol.getLiteral("y").toString();
+                        String[] splitArray = object.split(";");
+                        object = "";
+                        for(int i = 0; i < splitArray.length-1; i++) {
+                            if(splitArray[i].trim().equals(text.trim())) { }
+                            else
+                                object += splitArray[i] + "; ";
+                        }
+                    }
+                    update = UpdateFactory.create("INSERT DATA{<" + res + "> <" + property + "> \"" + object + "\"}");
+                    exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema1");
+                    exec.execute();
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addReservationToMovie(String movieName, String reservation) {
+        updateTables(movieName, "reservations", reservation, true);
+    }
 
 }

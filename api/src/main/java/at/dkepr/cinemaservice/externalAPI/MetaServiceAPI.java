@@ -41,4 +41,24 @@ public class MetaServiceAPI {
         return metaService.getAllCinemas();
     }
 
+    @RequestMapping(value="/Remove/Reservation/{cinema}/{movie}", consumes= "text/plain", method= RequestMethod.POST)
+    public void removeReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody String reservation) throws IOException {
+        try {
+            metaService.removeReservation(cinema, movie, reservation);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value="/Create/Reservation/{cinema}/{movie}", consumes= "text/plain", method= RequestMethod.POST)
+    public void createReservation(@PathVariable String cinema, @PathVariable String movie, @RequestBody String reservation) throws IOException {
+        try {
+            metaService.createReservation(cinema, movie, reservation);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -6,12 +6,17 @@ import at.dkepr.cinemaservice.domain.RegisteredCinemas;
 import at.dkepr.cinemaservice.domain.WeekDayEnum;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.jena.rdf.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 public class MetaServiceImpl {
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public List<Movie> getMoviesCinema1(Model model){
         List<Movie> movieList = Lists.newArrayList();
@@ -65,7 +70,8 @@ public class MetaServiceImpl {
                     properties = object.toString().split(";");
                     for(int i = 0; i<properties.length; i++){
                         String[] subProperties = properties[i].split(":");
-                        movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1])).add(subProperties[0]);
+                        if(subProperties[0].compareTo("") != 0 && subProperties.length > 1)
+                        movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(subProperties[0].trim());
                     }
                     break;
                 case "days":
@@ -133,6 +139,7 @@ public class MetaServiceImpl {
                     properties = object.toString().split(";");
                     for(int i = 0; i<properties.length; i++){
                         String[] subProperties = properties[i].split(":");
+                        if(subProperties[0].compareTo("") != 0 && subProperties.length > 1)
                         movie.getReservations().get(WeekDayEnum.valueOf(subProperties[1].trim())).add(subProperties[0].trim());
                     }
                     break;
@@ -196,5 +203,13 @@ public class MetaServiceImpl {
             cinemas.add(cinema);
         }
         return cinemas;
+    }
+
+    public void removeReservation(String cinema, String movie, String reservation) {
+        restTemplate.postForLocation("http://localhost:8080/" + cinema + "/Remove/Reservation/" + movie, reservation);
+    }
+
+    public void createReservation(String cinema, String movie, String reservation) {
+        restTemplate.postForLocation("http://localhost:8080/" + cinema + "/Create/Reservation/" + movie, reservation);
     }
 }

@@ -7,4 +7,6 @@ public interface Cinema1Service {
     Model getAllMovies(String URL);
     Model getAllReservations(String URL);
     Model getReservationsByMovie(String URL, String movie);
+    void removeReservationFromMovie(String movieName, String reservation);
+    void addReservationToMovie(String movieName, String reservation);
 }
