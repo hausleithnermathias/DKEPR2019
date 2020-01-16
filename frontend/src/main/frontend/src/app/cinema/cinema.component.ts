@@ -52,7 +52,8 @@ export class CinemaComponent implements OnInit {
   }
 
   onSubmit(){
-
+    console.log(this.daySelected)
+    console.log(this.personSelected)
   }
 
 }

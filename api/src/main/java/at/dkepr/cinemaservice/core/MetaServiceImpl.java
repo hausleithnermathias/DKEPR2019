@@ -7,6 +7,7 @@ import at.dkepr.cinemaservice.domain.WeekDayEnum;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.jena.rdf.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,9 @@ public class MetaServiceImpl {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    Environment environment;
 
     public List<Movie> getMoviesCinema1(Model model){
         List<Movie> movieList = Lists.newArrayList();
@@ -167,13 +171,16 @@ public class MetaServiceImpl {
     public List<Movie> getMoviesByDay(String cinema, String day){
 
         Model model = ModelFactory.createDefaultModel();
-        model.read("http://localhost:8080/" + cinema + "/Movies/" + day);
+        String url = environment.getProperty(cinema.toLowerCase() + ".url");
+        model.read(url + "/Movies/" + day);
 
-        switch(cinema) {
-            case "Cinema1":
+        switch(RegisteredCinemas.valueOf(cinema.toUpperCase())) {
+            case STARMOVIE:
                 return getMoviesCinema1(model);
-            case "Cinema2":
+            case MEGAPLEX:
                 return getMoviesCinema2(model);
+            case GEIL:
+                return getMoviesCinema1(model);
         }
         return null;
     }
@@ -181,13 +188,16 @@ public class MetaServiceImpl {
     public List<Movie> getAllMovies(String cinema){
 
         Model model = ModelFactory.createDefaultModel();
-        model.read("http://localhost:8080/" + cinema + "/Movies/All");
+        String url = environment.getProperty(cinema.toLowerCase() + ".url");
+        model.read(url + "/Movies/All");
 
-        switch(cinema) {
-            case "Cinema1":
+        switch(RegisteredCinemas.valueOf(cinema.toUpperCase())) {
+            case STARMOVIE:
                 return getMoviesCinema1(model);
-            case "Cinema2":
+            case MEGAPLEX:
                 return getMoviesCinema2(model);
+            case GEIL:
+                return getMoviesCinema1(model);
         }
         return null;
     }
@@ -198,8 +208,8 @@ public class MetaServiceImpl {
 
         for(RegisteredCinemas registeredCinema: RegisteredCinemas.values()){
             Cinema cinema = new Cinema();
-            cinema.setName(registeredCinema.toString());
-            cinema.setMovies(getAllMovies(registeredCinema.toString()));
+            cinema.setName(registeredCinema.value);
+            cinema.setMovies(getAllMovies(registeredCinema.value));
             cinemas.add(cinema);
         }
         return cinemas;
