@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basePath : 'http://localhost:14001/comparison'
+  basePath : 'http://localhost:8080'
 };
 
 /*

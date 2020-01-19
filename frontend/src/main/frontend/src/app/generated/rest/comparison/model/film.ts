@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Reservierung } from './reservierung';
 
 
 /**
@@ -31,10 +32,15 @@ export interface Film {
      * Genre
      */
     genre?: string;
+    menu?: Array<string>;
+    /**
+     * Menus
+     */
+    menus?: Array<string>;
     /**
      * Reservierungen pro Tag
      */
-    reservierungen?: { [key: string]: Array<string>; };
+    reservierungen?: { [key: string]: Array<Reservierung>; };
     /**
      * Schauspieler
      */

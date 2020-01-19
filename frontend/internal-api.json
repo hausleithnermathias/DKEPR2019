@@ -1,4 +1,3 @@
-
 {
     "swagger": "2.0",
     "info": {
@@ -22,175 +21,26 @@
             "description": "Basic Error Controller"
         },
         {
-            "name": "cinema-1-api",
-            "description": "Cinema 1 API"
-        },
-        {
             "name": "meta-service-api",
             "description": "Meta Service API"
         }
     ],
     "paths": {
-        "/Cinema1/Movies/All": {
-            "get": {
-                "tags": [
-                    "cinema-1-api"
-                ],
-                "summary": "getAllMovies",
-                "operationId": "getAllMoviesUsingGET",
-                "produces": [
-                    "application/xml",
-                    "application/rdf+xml"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/Cinema1/Movies/{day}": {
-            "get": {
-                "tags": [
-                    "cinema-1-api"
-                ],
-                "summary": "getMoviesByDay",
-                "operationId": "getMoviesByDayUsingGET",
-                "produces": [
-                    "application/xml",
-                    "application/rdf+xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "day",
-                        "in": "path",
-                        "description": "day",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/Cinema1/Reservations/All": {
-            "get": {
-                "tags": [
-                    "cinema-1-api"
-                ],
-                "summary": "getAllReservations",
-                "operationId": "getAllReservationsUsingGET",
-                "produces": [
-                    "application/xml",
-                    "application/rdf+xml"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
-        "/Cinema1/Reservations/{movie}": {
-            "get": {
-                "tags": [
-                    "cinema-1-api"
-                ],
-                "summary": "getReservationsByMovie",
-                "operationId": "getReservationsByMovieUsingGET",
-                "produces": [
-                    "application/xml",
-                    "application/rdf+xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "movie",
-                        "in": "path",
-                        "description": "movie",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "deprecated": false
-            }
-        },
         "/error": {
             "get": {
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingGET",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingGET",
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "401": {
@@ -209,22 +59,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingHEAD",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingHEAD",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -243,22 +90,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPOST",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPOST",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "201": {
@@ -280,22 +124,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPUT",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPUT",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "201": {
@@ -317,19 +158,16 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingDELETE",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingDELETE",
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -348,22 +186,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingOPTIONS",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingOPTIONS",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -382,22 +217,19 @@
                 "tags": [
                     "basic-error-controller"
                 ],
-                "summary": "error",
-                "operationId": "errorUsingPATCH",
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPATCH",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
-                    "*/*"
+                    "text/html"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "object"
-                            }
+                            "$ref": "#/definitions/ModelAndView"
                         }
                     },
                     "204": {
@@ -429,6 +261,122 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/service/Create/Reservation/{cinema}/{movie}": {
+            "post": {
+                "tags": [
+                    "meta-service-api"
+                ],
+                "summary": "createReservation",
+                "operationId": "createReservationUsingPOST",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "cinema",
+                        "in": "path",
+                        "description": "cinema",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "movie",
+                        "in": "path",
+                        "description": "movie",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reservation",
+                        "description": "reservation",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/reservierung"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/service/Remove/Reservation/{cinema}/{movie}": {
+            "post": {
+                "tags": [
+                    "meta-service-api"
+                ],
+                "summary": "removeReservation",
+                "operationId": "removeReservationUsingPOST",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "cinema",
+                        "in": "path",
+                        "description": "cinema",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "movie",
+                        "in": "path",
+                        "description": "movie",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reservation",
+                        "description": "reservation",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/reservierung"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Created"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -482,7 +430,7 @@
                     "meta-service-api"
                 ],
                 "summary": "getAllMovies",
-                "operationId": "getAllMoviesUsingGET_1",
+                "operationId": "getAllMoviesUsingGET",
                 "produces": [
                     "*/*"
                 ],
@@ -524,7 +472,7 @@
                     "meta-service-api"
                 ],
                 "summary": "getMoviesByDay",
-                "operationId": "getMoviesByDayUsingGET_1",
+                "operationId": "getMoviesByDayUsingGET",
                 "produces": [
                     "*/*"
                 ],
@@ -700,13 +648,26 @@
                     "type": "string",
                     "description": "Genre"
                 },
+                "menu": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "menus": {
+                    "type": "array",
+                    "description": "Menus",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "reservierungen": {
                     "type": "object",
                     "description": "Reservierungen pro Tag",
                     "additionalProperties": {
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "$ref": "#/definitions/reservierung"
                         }
                     }
                 },
@@ -763,10 +724,34 @@
                 "kino": {
                     "type": "string",
                     "description": "Name des Kinos"
+                },
+                "menu": {
+                    "type": "boolean",
+                    "description": "Menu moeglich"
                 }
             },
             "title": "kino",
             "description": "Kino"
+        },
+        "reservierung": {
+            "type": "object",
+            "discriminator": "loB",
+            "properties": {
+                "menu": {
+                    "type": "boolean",
+                    "description": "Menü"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Reservierungsname"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "Tag"
+                }
+            },
+            "title": "reservierung",
+            "description": "Reservierung"
         }
     }
 }

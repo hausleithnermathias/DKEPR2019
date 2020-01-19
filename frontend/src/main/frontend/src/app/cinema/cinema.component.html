@@ -43,7 +43,6 @@
               </select>
             </div>
           </div>
-
         </div>
         <div class="form-group">
           <div class="row">
@@ -58,6 +57,21 @@
             </div>
           </div>
         </div>
+        <div class="form-group" *ngIf="cinemaSelected.menu == true">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Mit Menü </label>
+            </div>
+            <div class="col-md-6">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" [(ngModel)]="menuSelected" name="menuSelected">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div class="modal-footer">
           <button [disabled]="!myForm.valid" pButton type="submit" (click)="modal.close('Save click'); onSubmit()"
@@ -68,59 +82,133 @@
   </div>
 
 </ng-template>
-
-<div style="height: 100%" *ngIf="cinemaList">
-  <div class="row">
-    <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
-      <div class="ui-card ui-widget ui-widget-content ui-corner-all"
-           style="width: 360px; margin-left: 20px; margin-right: 20px;"
-           *ngFor="let c of cinemaList; let i = index;">
-        <div class="ui-card-body">
-          <div class="ui-card-title ng-star-inserted">
-            {{c.kino}}
+<ng-template #reservations let-modal style="overflow: auto">
+  <div class="modal-header">
+    <div class="col-md-10">
+      <h4 class="modal-title">Reservierungen für {{movieSelected.titel}}</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="container" style="width: 100%">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            Altersfreigabe: {{movieSelected.altersfreigabe}}
           </div>
-          <div class="ui-card-content">
-            <button pButton type="button" label="Zum Kinoprogramm" (click)="showMovies(i)"></button>
+          <div class="row">
+            Genre: {{movieSelected.genre}}
+          </div>
+          <div class="row">
+            Dauer: {{movieSelected.spieldauer}}
+          </div>
+          <div class="row">
+            Sprache: {{movieSelected.sprache}}
           </div>
         </div>
       </div>
-    </p-card>
-  </div>
-
-  <div class="row" *ngIf="this.cinemaSelected">
-    <p-card class="cinema-card" [style]="{background: '#8F8F8F'}">
-      <div class="ui-card ui-widget ui-widget-content ui-corner-all col-md-6" style="position: center"
-           *ngFor="let movie of cinemaSelected.filme">
-        <div class="ui-card-body">
-          <div class="ui-card-title ng-star-inserted">
-            {{movie.titel}}
+      <div class="row" style="margin-top: 10px; font-size: 20px">
+        <b>Alle Reservierungen:</b>
+        <div *ngFor="let tag of movieSelected.spieltage">
+          {{tag}}:
+          <ng-container *ngIf="movieSelected.reservierungen[tag].length == 0">
+            keine Reservierungen
+          </ng-container>
+          <div style="white-space: nowrap">
+            <ul *ngFor="let reservation of movieSelected.reservierungen[tag]">
+              <li style="position: relative">{{reservation.name}}
+                <ng-container *ngIf="reservation.menu == false">
+                  ohne Menü
+                </ng-container>
+                <ng-container *ngIf="reservation.menu == true">
+                  mit Menü
+                </ng-container>
+                <button style="float: right" (click)="deleteReservation(reservation)"><i class="fa fa-trash"
+                                                                                         style="size: 8px"></i></button>
+              </li>
+            </ul>
           </div>
-          <div class="ui-card-content">
-            <div class="container" style="width: 100%">
-              <div class="col-md-4">
-                <div class="row">
-                  Altersfreigabe: {{movie.altersfreigabe}}
-                </div>
-                <div class="row">
-                  Genre: {{movie.genre}}
-                </div>
-                <div class="row">
-                  Dauer: {{movie.spieldauer}}
-                </div>
-                <div class="row">
-                  Sprache: {{movie.sprache}}
-                </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button pButton (click)="modal.close('Save click')"
+                label="Fenster schließen"></button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<div style="height: 100%; margin-top: 10px; margin-bottom: 10px" *ngIf="cinemaList">
+  <div class="row">
+    <div class="ui-card ui-widget ui-widget-content ui-corner-all"
+         style="width: 100%; padding-left: 20px; padding-right: 20px; border: none;"
+         *ngFor="let c of cinemaList; let i = index;">
+      <div class="col-lg-{{linesplitter()}}">
+        <p-card class="cinema-card" [style]="{background: '#FFFFFF'}">
+          <div class="ui-card-body row" *ngIf="c != null" style="border: none">
+            <div class="ui-card-title ng-star-inserted col-md-6">
+              <img src="assets/logos/{{c.kino.toLowerCase()}}.png" style="height: 100px">
+            </div>
+            <div class="ui-card-content col-md-6">
+              <button pButton type="button" label="Zum Kinoprogramm" (click)="showMovies(i)"><i
+                class="fa fa-chevron-circle-down fa-5x"
+              ></i>
+              </button>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.cinemaSelected">
+  <div class="ui-card ui-widget ui-widget-content ui-corner-all col-md-6"
+       style="position: center; border:none; margin-bottom: 5px;"
+       *ngFor="let movie of cinemaSelected.filme">
+    <p-card class="cinema-card" [style]="{background: '#FFFFFF'}">
+      <div class="ui-card-body">
+        <div class="ui-card-title ng-star-inserted">
+          {{movie.titel}}
+        </div>
+        <div class="ui-card-content">
+          <div class="container" style="width: 100%">
+            <div class="col-md-4">
+              <div class="row">
+                Altersfreigabe: {{movie.altersfreigabe}}
               </div>
-              <div class="col-md-2">
-                <div>Spieltage</div>
+              <div class="row">
+                Genre: {{movie.genre}}
               </div>
-              <div class="col-md-2">
-                <ul style="list-style-type:none; padding-inline-start: 0; margin-bottom: 0" *ngFor="let tag of movie.spieltage">
-                  <li style="padding-left: 0">{{tag}}</li>
-                </ul>
+              <div class="row">
+                Dauer: {{movie.spieldauer}}
               </div>
-              <div class="col-md-4" style="padding-left: 60px">
-                <button pButton type="button" (click)="open(content, movie)" label="Reservieren"></button>
+              <div class="row">
+                Sprache: {{movie.sprache}}
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div>Spieltage</div>
+            </div>
+            <div class="col-md-2">
+              <ul style="list-style-type:none; padding-inline-start: 0; margin-bottom: 0"
+                  *ngFor="let tag of movie.spieltage">
+                <li style="padding-left: 0">{{tag}}</li>
+              </ul>
+            </div>
+            <div class="col-md-4" style="padding-left: 60px">
+              <div class="row">
+                <button pButton type="button" (click)="open(content, movie)" label="Reservieren"
+                        style="width: 100%"></button>
+              </div>
+              <div class="row" style="padding-top: 5px">
+                <button pButton type="button" (click)="openReservations(reservations, movie);"
+                        label="Reservierungen anzeigen" style="width: 100%; background-color: #da4453"></button>
               </div>
             </div>
           </div>
@@ -128,4 +216,5 @@
       </div>
     </p-card>
   </div>
+
 </div>

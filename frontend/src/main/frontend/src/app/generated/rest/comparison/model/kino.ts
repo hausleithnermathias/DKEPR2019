@@ -24,4 +24,8 @@ export interface Kino {
      * Name des Kinos
      */
     kino?: string;
+    /**
+     * Menu moeglich
+     */
+    menu?: boolean;
 }

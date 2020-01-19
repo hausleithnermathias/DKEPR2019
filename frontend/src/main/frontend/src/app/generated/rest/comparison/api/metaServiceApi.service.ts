@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 
 import { Film } from '../model/film';
 import { Kino } from '../model/kino';
+import { Reservierung } from '../model/reservierung';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -56,6 +57,63 @@ export class MetaServiceApiService {
         return false;
     }
 
+
+    /**
+     * createReservation
+     * 
+     * @param cinema cinema
+     * @param movie movie
+     * @param reservation reservation
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public createReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public createReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public createReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cinema === null || cinema === undefined) {
+            throw new Error('Required parameter cinema was null or undefined when calling createReservationUsingPOST.');
+        }
+
+        if (movie === null || movie === undefined) {
+            throw new Error('Required parameter movie was null or undefined when calling createReservationUsingPOST.');
+        }
+
+        if (reservation === null || reservation === undefined) {
+            throw new Error('Required parameter reservation was null or undefined when calling createReservationUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<any>(`${this.basePath}/service/Create/Reservation/${encodeURIComponent(String(cinema))}/${encodeURIComponent(String(movie))}`,
+            reservation,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * getAllCinemas
@@ -100,13 +158,13 @@ export class MetaServiceApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllMoviesUsingGET1(cinema: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
-    public getAllMoviesUsingGET1(cinema: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
-    public getAllMoviesUsingGET1(cinema: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
-    public getAllMoviesUsingGET1(cinema: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllMoviesUsingGET(cinema: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getAllMoviesUsingGET(cinema: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getAllMoviesUsingGET(cinema: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getAllMoviesUsingGET(cinema: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (cinema === null || cinema === undefined) {
-            throw new Error('Required parameter cinema was null or undefined when calling getAllMoviesUsingGET1.');
+            throw new Error('Required parameter cinema was null or undefined when calling getAllMoviesUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -142,17 +200,17 @@ export class MetaServiceApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
-    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
-    public getMoviesByDayUsingGET1(cinema: string, day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
-    public getMoviesByDayUsingGET1(cinema: string, day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Film>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Film>>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Film>>>;
+    public getMoviesByDayUsingGET(cinema: string, day: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (cinema === null || cinema === undefined) {
-            throw new Error('Required parameter cinema was null or undefined when calling getMoviesByDayUsingGET1.');
+            throw new Error('Required parameter cinema was null or undefined when calling getMoviesByDayUsingGET.');
         }
 
         if (day === null || day === undefined) {
-            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET1.');
+            throw new Error('Required parameter day was null or undefined when calling getMoviesByDayUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -171,6 +229,63 @@ export class MetaServiceApiService {
         ];
 
         return this.httpClient.get<Array<Film>>(`${this.basePath}/service/movies/${encodeURIComponent(String(cinema))}/${encodeURIComponent(String(day))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * removeReservation
+     * 
+     * @param cinema cinema
+     * @param movie movie
+     * @param reservation reservation
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public removeReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public removeReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public removeReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public removeReservationUsingPOST(cinema: string, movie: string, reservation: Reservierung, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cinema === null || cinema === undefined) {
+            throw new Error('Required parameter cinema was null or undefined when calling removeReservationUsingPOST.');
+        }
+
+        if (movie === null || movie === undefined) {
+            throw new Error('Required parameter movie was null or undefined when calling removeReservationUsingPOST.');
+        }
+
+        if (reservation === null || reservation === undefined) {
+            throw new Error('Required parameter reservation was null or undefined when calling removeReservationUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+          'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<any>(`${this.basePath}/service/Remove/Reservation/${encodeURIComponent(String(cinema))}/${encodeURIComponent(String(movie))}`,
+            reservation,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
