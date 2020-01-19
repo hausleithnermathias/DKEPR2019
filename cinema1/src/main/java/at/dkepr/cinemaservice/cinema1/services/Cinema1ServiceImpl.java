@@ -155,7 +155,7 @@ public class Cinema1ServiceImpl implements Cinema1Service{
 
             ResultSet results = qe.execSelect();
 
-            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/starmovie/movies/" + movieName.toLowerCase() + "> <http://www.cinemas.fake/starmovie/movies/dt#" + type +"> ?o}");
+            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/starmovie/movies/" + movieName.replaceAll(" ","").toLowerCase() + "> <http://www.cinemas.fake/starmovie/movies/dt#" + type +"> ?o}");
             exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema1");
             exec.execute();
 

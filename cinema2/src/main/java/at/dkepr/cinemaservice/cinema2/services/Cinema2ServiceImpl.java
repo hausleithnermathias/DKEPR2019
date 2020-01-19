@@ -81,7 +81,7 @@ public class Cinema2ServiceImpl implements Cinema2Service{
 
             ResultSet results = qe.execSelect();
 
-            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/megaplex/movies/" + movieName.toLowerCase() + "> <http://www.cinemas.fake/megaplex/movies/info#" + type +"> ?o}");
+            update  = UpdateFactory.create("DELETE WHERE { <http://www.cinemas.fake/megaplex/movies/" + movieName.replaceAll(" ","").toLowerCase() + "> <http://www.cinemas.fake/megaplex/movies/info#" + type +"> ?o}");
             exec = UpdateExecutionFactory.createRemote(update, "http://localhost:3030/cinema2");
             exec.execute();
 
