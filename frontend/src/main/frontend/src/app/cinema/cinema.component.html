@@ -121,11 +121,13 @@
           <div style="white-space: nowrap">
             <ul *ngFor="let reservation of movieSelected.reservierungen[tag]">
               <li style="position: relative">{{reservation.name}}
-                <ng-container *ngIf="reservation.menu == false">
-                  ohne Menü
-                </ng-container>
-                <ng-container *ngIf="reservation.menu == true">
-                  mit Menü
+                <ng-container *ngIf="cinemaSelected.menu == true">
+                  <ng-container *ngIf="reservation.menu == false">
+                    ohne Menü
+                  </ng-container>
+                  <ng-container *ngIf="reservation.menu == true">
+                    mit Menü
+                  </ng-container>
                 </ng-container>
                 <button style="float: right" (click)="deleteReservation(reservation)"><i class="fa fa-trash"
                                                                                          style="size: 8px"></i></button>
