@@ -1,0 +1,4 @@
+Semantic Web Service (Cinema 2): Denny Graf und Felix Baumgärtner
+Semantic Web Service (Cinema 1): Andreas Eigner 
+Meta-Service: Felix Baumgärtner, Andreas Eigner, Denny Graf, Mathias Hausleithner
+Client Applikation: Mathias Hausleithner

@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:fi="http://www.cinemas.fake/megaplex/movies/info#">
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/frozen">
+
+ 	<fi:title>Frozen</fi:title>
+  	<fi:genre>Animation</fi:genre>
+  	<fi:year>2013</fi:year>
+  	<fi:language>Englisch</fi:language>
+  	<fi:duration>102</fi:duration>
+  	<fi:FSK>0</fi:FSK>
+  	<fi:director>Chris Buck; Jennifer Lee</fi:director>
+  	<fi:actors>Kristen Bell; Idina Menzel; Jonathan Groff</fi:actors>
+  	<fi:days>Mo; Mi</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/interstellar">
+
+    <fi:title>Interstellar</fi:title>
+	<fi:genre>Science Fiction</fi:genre>
+  	<fi:year>2014</fi:year>
+  	<fi:language>Englisch</fi:language>	
+ 	<fi:duration>169</fi:duration>
+ 	<fi:FSK>12</fi:FSK>
+ 	<fi:director>Christopher Nolan</fi:director>
+ 	<fi:actors>Matthew McConaughey, Anne Hathaway</fi:actors>
+	<fi:days>Fr;Sa</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/es">
+
+ 	<fi:title>Es</fi:title>
+	<fi:genre>Horror</fi:genre>
+  	<fi:year>2017</fi:year>
+  	<fi:language>Deutsch</fi:language>
+  	<fi:duration>135</fi:duration>
+  	<fi:FSK>16</fi:FSK>
+  	<fi:director>Seth Grahame-Smith</fi:director>
+  	<fi:actors>Jaeden Lieberher, Sophia Lillis</fi:actors>
+  	<fi:days>Mo; So</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/avengers">
+
+ 	<fi:title>Avengers</fi:title>
+  	<fi:genre>Action</fi:genre>
+  	<fi:year>2012</fi:year>
+  	<fi:language>Deutsch</fi:language>
+  	<fi:duration>143</fi:duration>
+  	<fi:FSK>12</fi:FSK>
+  	<fi:director>Joss Whedon</fi:director>
+  	<fi:actors>Robert Downey Jr., Chris Evans, Scarlett Johansson</fi:actors>
+  	<fi:days>Mo; Di; Mi; So</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/starwars-daserwachendermacht">
+
+ 	<fi:title>Star Wars - Das Erwachen der Macht</fi:title>
+  	<fi:genre>Science Fiction</fi:genre>
+  	<fi:year>2015</fi:year>
+  	<fi:language>Deutsch</fi:language>
+  	<fi:duration>135</fi:duration>
+  	<fi:FSK>12</fi:FSK>
+  	<fi:director>J.J. Abrams</fi:director>
+  	<fi:actors>Daisy Ridley, John Boyega, Oscar Isaac</fi:actors>
+  	<fi:days>Mo; Di; Mi</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/dirtydancing">
+
+ 	<fi:title>Dirty Dancing</fi:title>
+  	<fi:genre>Romance</fi:genre>
+  	<fi:year>1987</fi:year>
+  	<fi:language>Englisch</fi:language>
+  	<fi:duration>100</fi:duration>
+  	<fi:FSK>12</fi:FSK>
+  	<fi:director>Emile Ardolino</fi:director>
+  	<fi:actors>Patrick Swayze; Jennifer Grey</fi:actors>
+  	<fi:days>Do; Sa</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/elcamino">
+
+ 	<fi:title>El Camino</fi:title>
+  	<fi:genre>Action</fi:genre>
+  	<fi:year>2019</fi:year>
+  	<fi:language>Deutsch</fi:language>
+  	<fi:duration>122</fi:duration>
+  	<fi:FSK>14</fi:FSK>
+  	<fi:director>Vince Gilligan</fi:director>
+  	<fi:actors>Aaron Paul; Bryan Cranston</fi:actors>
+  	<fi:days>Fr</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/thepurge-anarchy">
+
+ 	<fi:title>The Purge - Anarchy</fi:title>
+  	<fi:genre>Horror</fi:genre>
+  	<fi:year>2014</fi:year>
+  	<fi:language>Englisch</fi:language>
+  	<fi:duration>103</fi:duration>
+  	<fi:FSK>16</fi:FSK>
+  	<fi:director>James DeMonaco</fi:director>
+  	<fi:actors>Frank Grillo; Jason Blum</fi:actors>
+  	<fi:days>So</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+
+    <rdf:Description rdf:about="http://www.cinemas.fake/megaplex/movies/thegreenbook">
+
+ 	<fi:title>The Green Book</fi:title>
+  	<fi:genre>Comedy-Drama</fi:genre>
+  	<fi:year>2018</fi:year>
+  	<fi:language>Deutsch</fi:language>
+  	<fi:duration>130</fi:duration>
+  	<fi:FSK>12</fi:FSK>
+  	<fi:director>Peter Farrelly</fi:director>
+  	<fi:actors>Viggo Mortensen; Mahershala Ali; Linda Cardellini</fi:actors>
+  	<fi:days>Do; Fr; Sa; So</fi:days>
+  	<fi:reservations/>
+    </rdf:Description>
+
+</rdf:RDF>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

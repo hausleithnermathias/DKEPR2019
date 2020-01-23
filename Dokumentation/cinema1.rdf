@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dt="http://www.cinemas.fake/starmovie/movies/dt#">
+
+<rdf:Description 
+rdf:about="http://www.cinemas.fake/starmovie/movies/joker">
+  <dt:title>Joker</dt:title>
+  <dt:country>USA 2019</dt:country>
+  <dt:language>Deutsch</dt:language>
+  <dt:genre>Action</dt:genre>
+  <dt:duration>122 Min</dt:duration>
+  <dt:agerating>ab 16 J.</dt:agerating>
+  <dt:actors>Joaqin Phoenix, Robert De Niro</dt:actors>
+  <dt:production>Todd Phillips</dt:production>
+  <dt:days>Mo;Di</dt:days>
+  <dt:reservations/>
+</rdf:Description>
+
+<rdf:Description 
+rdf:about="http://www.cinemas.fake/starmovie/movies/leberkaesjunkie">
+  <dt:title>Leberkaesjunkie</dt:title>
+  <dt:country>D 2019</dt:country>
+  <dt:language>Deutsch</dt:language>
+  <dt:genre>Comedy</dt:genre>
+  <dt:duration>95 Min</dt:duration>
+  <dt:agerating>ab 12 J.</dt:agerating>
+  <dt:actors>Sebastian Bezzel, Simon Schwarz, Lisa Maria Potthoff</dt:actors>
+  <dt:production>Ed Herzog</dt:production>
+  <dt:days>Do;Fr;Sa;So</dt:days>
+  <dt:reservations/>
+</rdf:Description>
+
+<rdf:Description 
+rdf:about="http://www.cinemas.fake/starmovie/movies/dasperfektegeheimnis">
+  <dt:title>Das perfekte Geheimnis</dt:title>
+  <dt:country>D 2019</dt:country>
+  <dt:language>Deutsch</dt:language>
+  <dt:genre>Comedy</dt:genre>
+  <dt:duration>120 Min</dt:duration>
+  <dt:agerating>ab 12 J.</dt:agerating>
+  <dt:actors>Elyas M'Barek, Karoline Herfurth, Florian David Fitz</dt:actors>
+  <dt:production>Bora Dagtekin</dt:production>
+  <dt:days>Mo;Mi</dt:days>
+  <dt:reservations/>
+</rdf:Description>
+
+<rdf:Description 
+rdf:about="http://www.cinemas.fake/starmovie/movies/jumanji">
+  <dt:title>Jumanji</dt:title>
+  <dt:country>USA 2019</dt:country>
+  <dt:language>Deutsch</dt:language>
+  <dt:genre>Abenteuer</dt:genre>
+  <dt:duration>123 Min</dt:duration>
+  <dt:agerating>ab 10 J.</dt:agerating>
+  <dt:actors>Dwayne Johnson, Kevin Hart, Jack Black, Karen Gillan, Danny DeVito</dt:actors>
+  <dt:production>Jake Kasdan, Joe Johnston</dt:production>
+  <dt:days>Di;Mi;So</dt:days>
+  <dt:reservations/>
+</rdf:Description>
+
+<rdf:Description 
+rdf:about="http://www.cinemas.fake/starmovie/movies/hustlers">
+  <dt:title>Hustlers</dt:title>
+  <dt:country>USA 2019</dt:country>
+  <dt:language>Deutsch</dt:language>
+  <dt:genre>Drama/Crime</dt:genre>
+  <dt:duration>111 Min</dt:duration>
+  <dt:agerating>ab 16 J.</dt:agerating>
+  <dt:actors>Jennifer Lopez, Julia Stiles, Madeline Brewer, Cardi B</dt:actors>
+  <dt:production>Lorene Scafaria</dt:production>
+  <dt:days>Mo;Di;Mi;Do;Fr;Sa;So</dt:days>
+  <dt:reservations/>
+</rdf:Description>
+
+
+
+
+
+</rdf:RDF>
